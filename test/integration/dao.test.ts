@@ -5,9 +5,8 @@ import { ServiceHandler } from '@flexiblepersistence/service';
 import DBHandler from './dBHandler';
 import TestController from './testController';
 import { Test } from './test.class';
-import { mockResponse } from './response.mock';
+import { mockSocket } from './socket.mock';
 
-import { Request, Response } from 'express';
 import { DAODB, Utils } from '@flexiblepersistence/dao';
 
 test('store test, update, select all, select by id test and delete it', async (done) => {
@@ -26,10 +25,10 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         body: sentTest,
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
     // console.log('store:', store);
-    const storedTest = store['received'];
+    const storedTest = store['received'].object;
     // console.log('storedTest:', storedTest);
 
     sentTest.id = storedTest.id;
@@ -42,20 +41,20 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         params: { filter: {} },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
     // console.log('show:', show);
-    const indexTest = index['received'];
+    const indexTest = index['received'].object;
     expect(indexTest).toStrictEqual(expectedTest);
 
     const store2 = await controller.store(
       ({
         body: sentTest2,
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
     // console.log('store:', store);
-    const storedTest2 = store2['received'];
+    const storedTest2 = store2['received'].object;
     // console.log('storedTest2:', storedTest);
 
     sentTest2.id = storedTest2.id;
@@ -68,10 +67,10 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         params: { filter: {} },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
 
-    const showTest = show['received'];
+    const showTest = show['received'].object;
     // console.log('showTest:', showTest);
     const expectedTests = [storedTest, storedTest2];
     expect(showTest).toStrictEqual(expectedTests);
@@ -86,11 +85,11 @@ test('store test, update, select all, select by id test and delete it', async (d
           single: false,
         },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
     // console.log('storedTest2:', storedTest2);
 
-    const updatedTest = update['received'];
+    const updatedTest = update['received'].object;
     // console.log('updatedTest:', updatedTest);
     const expectedUpdatedTest = { id: storedTest2.id, name: sentTest3.name };
     // console.log('expectedUpdatedTest:', expectedUpdatedTest);
@@ -100,10 +99,10 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         params: { filter: {} },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
 
-    const showTest2 = show2['received'];
+    const showTest2 = show2['received'].object;
     // console.log('showTest2:', showTest2);
     const expectedTests2 = [storedTest, updatedTest];
     // console.log('expectedTests2:', expectedTests2);
@@ -116,10 +115,10 @@ test('store test, update, select all, select by id test and delete it', async (d
           filter: { id: storedTest2.id },
         },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
 
-    const deletedTest = deleted['received'];
+    const deletedTest = deleted['received'].object;
     // console.log('deletedTest:', deletedTest);
     const expectedDeletedTest = true;
     // console.log('expectedDeletedTest:', expectedDeletedTest);
@@ -129,10 +128,10 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         params: { filter: {} },
       } as unknown) as Request,
-      (mockResponse as unknown) as Response
+      mockSocket
     );
 
-    const showTest3 = show3['received'];
+    const showTest3 = show3['received'].object;
     // console.log('showTest3:', showTest3);
     const expectedTests3 = [storedTest];
     expect(showTest3).toStrictEqual(expectedTests3);
