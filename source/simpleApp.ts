@@ -1,18 +1,24 @@
-import { createServer } from 'http';
-import { Server, Socket } from 'socket.io';
+import { Server, ServerOptions, Socket } from 'socket.io';
 
 import RouterSingleton from './router/routerSingleton';
 import { DatabaseHandler, DatabaseHandlerInitializer } from 'backapisocket';
 
 export default class SimpleApp {
-  io: Server;
+  server: Server;
   router: RouterSingleton;
   databaseHandler: DatabaseHandler;
-  constructor(router: RouterSingleton, databaseHandler: DatabaseHandler) {
-    const httpServer = createServer();
-    this.io = new Server(httpServer, {
-      // ...
-    });
+  protected _port: number;
+  public get port(): number {
+    return this._port;
+  }
+  constructor(
+    router: RouterSingleton,
+    databaseHandler: DatabaseHandler,
+    port: number,
+    options?: Partial<ServerOptions>
+  ) {
+    this._port = port;
+    this.server = new Server(port, options);
     this.middlewares();
     this.router = router;
     this.databaseHandler = databaseHandler;
@@ -23,8 +29,12 @@ export default class SimpleApp {
   protected middlewares(): void {}
 
   protected routes(initDefault?: DatabaseHandlerInitializer): void {
-    this.io.on('connection', (socket: Socket) => {
-      this.router.createRoutes.bind(this.router)(socket, initDefault);
+    this.server.on('connection', (socket: Socket) => {
+      this.router.createRoutes.bind(this.router)(
+        this.server,
+        socket,
+        initDefault
+      );
     });
   }
 }
