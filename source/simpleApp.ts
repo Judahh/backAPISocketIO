@@ -1,7 +1,7 @@
 import { Server, ServerOptions, Socket } from 'socket.io';
 
 import RouterSingleton from './router/routerSingleton';
-import { DatabaseHandler, DatabaseHandlerInitializer } from 'backapisocket';
+import { DatabaseHandler, DatabaseHandlerInitializer } from 'backapi';
 
 export default class SimpleApp {
   server: Server;

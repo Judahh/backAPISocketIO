@@ -47,6 +47,7 @@
   "dependencies": {
     "journaly": "latest",
     "pg": "latest",
+    "backapi": "latest",
     "backapisocket": "latest",
     "socket.io": "latest"
   },
