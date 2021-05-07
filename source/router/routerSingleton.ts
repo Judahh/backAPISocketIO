@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Server, Socket } from 'socket.io';
-import { BaseControllerDefault, RouterInitializer } from 'backapisocket';
+import { BaseControllerDefault } from 'backapisocket';
+import { RouterInitializer } from 'backapi';
 // @ts-ignore
 export default class RouterSingleton {
   protected controller:
