@@ -51,6 +51,7 @@ class DBHandler extends DatabaseHandler {
 const journaly = Journaly.newJournaly() as SenderReceiver<any>;
 const database = new PersistenceInfo(readInfo, journaly);
 const eventdatabase = new PersistenceInfo(eventInfo, journaly);
+
 const pool = new Postgres(database);
 
 const dAO = new DAODB(pool, {
