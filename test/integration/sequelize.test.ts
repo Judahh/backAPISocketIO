@@ -6,13 +6,13 @@ import TestController from './testController';
 import { Test } from './test.class';
 import { mockSocket } from './socket.mock';
 
-import { SequelizeDB, Utils } from '@flexiblepersistence/sequelize';
+import { SequelizePersistence, Utils } from '@flexiblepersistence/sequelize';
 import { Pool } from 'pg';
 
 test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = new Pool(
     ((DBHandler.getReadHandler() as ServiceHandler)
-      .persistence as SequelizeDB).getPersistenceInfo()
+      .persistence as SequelizePersistence).getPersistenceInfo()
   );
   await Utils.init(pool);
   const obj = {};
@@ -21,10 +21,10 @@ test('store test, update, select all, select by id test and delete it', async (d
   const controller = new TestController(DBHandler.getInit());
   try {
     await ((DBHandler.getReadHandler() as ServiceHandler)
-      .persistence as SequelizeDB)
+      .persistence as SequelizePersistence)
       .getSequelize()
       .models.Test.sync({ force: true });
-    await handler.getWrite().clear();
+    await handler?.getWrite()?.clear();
 
     const sentTest = new Test();
     const sentTest2 = new Test();
@@ -148,12 +148,12 @@ test('store test, update, select all, select by id test and delete it', async (d
     expect(showTest3).toStrictEqual(expectedTests3);
   } catch (error) {
     console.error(error);
-    await handler.getWrite().clear();
+    await handler?.getWrite()?.clear();
     await Utils.end(pool);
     expect(error).toBe(null);
     done();
   }
-  await handler.getWrite().clear();
+  await handler?.getWrite()?.clear();
   await Utils.end(pool);
   done();
 });

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Server, Socket } from 'socket.io';
 import { BaseControllerDefault } from 'backapisocket';
-import { RouterInitializer } from 'backapi';
+import { IRouter } from 'backapi';
 // @ts-ignore
 export default class RouterSingleton {
   protected controller:
@@ -16,7 +16,7 @@ export default class RouterSingleton {
   abstract createRoutes(
     server: Server,
     socket: Socket,
-    initDefault?: RouterInitializer
+    initDefault?: IRouter
   ): void;
   protected static _instance: RouterSingleton;
 
