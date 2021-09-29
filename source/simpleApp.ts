@@ -1,7 +1,7 @@
 import { Server, ServerOptions, Socket } from 'socket.io';
 
 import RouterSingleton from './router/routerSingleton';
-import { DatabaseHandler, DatabaseHandlerInitializer } from 'backapi';
+import { DatabaseHandler, IDatabaseHandler } from 'backapi';
 
 export default class SimpleApp {
   server: Server;
@@ -28,7 +28,7 @@ export default class SimpleApp {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected middlewares(): void {}
 
-  protected routes(initDefault?: DatabaseHandlerInitializer): void {
+  protected routes(initDefault?: IDatabaseHandler): void {
     this.server.on('connection', (socket: Socket) => {
       this.router.createRoutes.bind(this.router)(
         this.server,
