@@ -73,3 +73,5 @@ export default DBHandler.getInstance({
   handler: handler,
   journaly: journaly,
 }) as DBHandler;
+
+export { write, read, handler };
