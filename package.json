@@ -53,6 +53,8 @@
   },
   "devDependencies": {
     "sequelize": "latest",
+    "flexiblepersistence": "latest",
+    "@flexiblepersistence/service": "latest",
     "@flexiblepersistence/sequelize": "latest",
     "@flexiblepersistence/dao": "latest",
     "@flexiblepersistence/pgsql": "latest",
