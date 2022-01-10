@@ -103,7 +103,7 @@ test('store test, update, select all, select by id test and delete it', async ()
 
     const updatedTest = update['received'].object;
     // console.log('updatedTest:', updatedTest);
-    const expectedUpdatedTest = [1];
+    const expectedUpdatedTest = { id: storedTest2.id, name: sentTest3.name };
     // console.log('expectedUpdatedTest:', expectedUpdatedTest);
     expect(updatedTest).toStrictEqual(expectedUpdatedTest);
 
