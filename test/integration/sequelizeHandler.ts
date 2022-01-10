@@ -72,6 +72,6 @@ const handler = new Handler(write, read);
 export default DBHandler.getInstance({
   handler: handler,
   journaly: journaly,
-}) as DBHandler;
+}) as DatabaseHandler;
 
-export { write, read, handler };
+export { write, read };
