@@ -42,7 +42,7 @@ class DBHandler extends DatabaseHandler {
   //     }
   //     const all = await this.journaly.publish('TestService.selectAll')[0];
   //     if (!all || all.length < 1) {
-  //       await this.journaly.publish('TestService.store', {});
+  //       await this.journaly.publish('TestService.create', {});
   //     }
   //   } catch (error) {
   //     return new Promise((resolve, reject) => reject(error));
@@ -72,6 +72,6 @@ const handler = new Handler(write, read);
 export default DBHandler.getInstance({
   handler: handler,
   journaly: journaly,
-}) as DBHandler;
+}) as DatabaseHandler;
 
-export { write, read, handler };
+export { write, read };
