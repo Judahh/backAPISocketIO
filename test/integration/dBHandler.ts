@@ -2,7 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
 // file deepcode ignore object-literal-shorthand: argh
-import { Handler, MongoPersistence, PersistenceInfo } from 'flexiblepersistence';
+import {
+  Handler,
+  MongoPersistence,
+  PersistenceInfo,
+} from 'flexiblepersistence';
 import { DatabaseHandler } from 'backapi';
 import TestService from './testService';
 import TestDAO from './testDAO';
