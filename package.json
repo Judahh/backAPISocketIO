@@ -49,7 +49,7 @@
     "pg": "latest",
     "backapi": "latest",
     "backapisocket": "latest",
-    "socket.io": "latest"
+    "socket.io": "4.6.0"
   },
   "devDependencies": {
     "sequelize": "latest",
